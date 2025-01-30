@@ -2,8 +2,10 @@ import requests
 import random
 import json
 
+
 url ="https://random-word-api.herokuapp.com/word"
-params = {'length': str(input('whats the length of the word boss? '))}
+params = {'length': str()}
+
 
 def getWord():
 
@@ -11,7 +13,7 @@ def getWord():
 
     if(response.status_code != 200):
         print('unnable to pull from API -- using offline list')
-        
+        return getOfflineWord()
 
     wordJSON = response.json()
     return wordJSON[0]
@@ -26,3 +28,4 @@ def getOfflineWord():
     with open('offlineWords.json') as wordsJSON:
         wordsList = json.load(wordsJSON)
     return wordsList[random.randrange(0,39)]
+
