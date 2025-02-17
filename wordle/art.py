@@ -258,9 +258,11 @@ def getArtOf(letter):
     if(letter == "h"):
         return h()
     if(letter == "j"):
-        return "j"
+        return j()
+    if(letter == "i"):
+        return i()
     if(letter == "k"):
-        return "k"
+        return k()
     if(letter == "l"):
         return l()
     if(letter == "m"):
@@ -283,6 +285,8 @@ def getArtOf(letter):
         return u()
     if(letter == "v"):
         return v()
+    if(letter == "w"):
+        return w()
     if(letter == "x"):
         return x()
     if(letter == "y"):
@@ -301,8 +305,3 @@ def printWord(string, colors):
     for l in string:
         temp.append(getArtOf(l))
     print(multiPrinter(temp, colors))
-
-printWord("your mom",[YELLOW, RED, RED, RED,RED,RED,RED,RED])
-
-print(multiPrinter([getArtOf("a"), getArtOf("b"), getArtOf("c")], [RED, GREEN, RED]))
-

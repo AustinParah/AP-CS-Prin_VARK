@@ -30,6 +30,34 @@ def checkValidLength(l):
         return True
     return False
 
+def getGuessColors(word, guess):
+    out = []
+    for i in range(0, len(word)):
+        itterout = ""
+        if(guess[i] in word):
+            itterout = art.YELLOW
+        if(guess[i] == word[i]):
+            itterout = art.GREEN
+            out.append(itterout)
+            continue
+        if(guess[i] in word):
+            out.append(itterout)
+            continue
+        out.append(art.RED)
+    return out
+
+def inputGuess(prompt, word):
+    valid = False
+    inp = ""
+    while not valid:
+        inp = input(prompt)
+        if(len(inp) != len(word)):
+            print("guesses must be the same length as selected word, currently", len(word))
+        else:
+            valid = True
+    return inp
+
+
 # startup
 while(checkValidLang(language.lower())):
     language = input("Enter language (en, es, fr, it, de, zh)\n  [$] ")
@@ -47,9 +75,13 @@ while(checkValidLength(length)):
 
 while(isRunning):
     word = words.getWord()
-    
-    guess = input("Please make a guess\n  [$] ")
-    art.printWord(guess, [art.RED, art.RED, art.RED, art.RED])
+    for i in range(0, 5): 
+        guess = inputGuess("Please make a guess\n  [$] ", word)
+        guessColors = getGuessColors(word.lower(), guess.lower())
+        art.printWord(guess.lower(), guessColors)
+        if(guess.lower() == word.lower()):
+            print("Congrats! you beat Terminal Wordle! ")
+            break
     isRunning = askPlaying()
 
 

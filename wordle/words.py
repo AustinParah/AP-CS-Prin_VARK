@@ -8,7 +8,6 @@ params = {'length': str()}
 
 
 def getWord():
-
     response = requests.get(url, params)
 
     if(response.status_code != 200):
@@ -16,6 +15,7 @@ def getWord():
         return getOfflineWord()
 
     wordJSON = response.json()
+    print(wordJSON[0])
     return wordJSON[0]
 
 def RegenerateOfflineWordlist():
