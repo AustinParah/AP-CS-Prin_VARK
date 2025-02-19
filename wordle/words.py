@@ -8,14 +8,19 @@ params = {'length': str()}
 
 
 def getWord():
-    response = requests.get(url, params)
+ 
+    try:
+        response = requests.get(url, params)
 
-    if(response.status_code != 200):
+        if(response.status_code != 200):
+            print('unnable to pull from API -- using offline list')
+            return getOfflineWord()
+    except (requests.exceptions.RequestException, IndexError):
         print('unnable to pull from API -- using offline list')
         return getOfflineWord()
 
     wordJSON = response.json()
-    print(wordJSON[0])
+    #print(wordJSON[0])
     return wordJSON[0]
 
 def RegenerateOfflineWordlist():

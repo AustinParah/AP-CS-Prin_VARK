@@ -46,6 +46,12 @@ def getGuessColors(word, guess):
         out.append(art.RED)
     return out
 
+def getColorsWhite(word):
+    out = []
+    for i in range(0, len(word)):
+        out.append(art.BLUE)
+    return out
+
 def inputGuess(prompt, word):
     valid = False
     inp = ""
@@ -75,13 +81,18 @@ while(checkValidLength(length)):
 
 while(isRunning):
     word = words.getWord()
+    won = False
     for i in range(0, 5): 
         guess = inputGuess("Please make a guess\n  [$] ", word)
         guessColors = getGuessColors(word.lower(), guess.lower())
         art.printWord(guess.lower(), guessColors)
         if(guess.lower() == word.lower()):
             print("Congrats! you beat Terminal Wordle! ")
+            won = True
             break
+    if(not won):
+        print("Sorry but you ran out of guesses the correct word was:")
+        art.printWord(word.lower(), getColorsWhite(word.lower()))
     isRunning = askPlaying()
 
 
